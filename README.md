@@ -18,4 +18,9 @@ npm run build # for server deployment; upload the ./dist folder to a server
 
 LoTUS-BF這個名字雖然很特別，會吸引人的好奇心，但我個人偏好能更直接知道這個網頁是在做什麼的名稱，所以更改成了NeuroBridge，代表這是一個可以連接有關神經的資訊的系統。
 
+
 最後，我增加了一個彈跳視窗，在進入網站的最一開始就能讓使用者直接了解網頁的內容和功能。
+
+## AI討論過程
+
+Gemini：https://gemini.google.com/share/695a06f4cb4d
