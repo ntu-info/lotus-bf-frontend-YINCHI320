@@ -7,6 +7,10 @@ export default defineConfig({
   // 1. 我們保留你正確的部署路徑
   base: '/lotus-bf-frontend-YINCHI320/',
 
+  build: {
+    outDir: 'docs'
+  },
+
   // 2. 我們保留你專案原有的 react 插件
   plugins: [react()],
   

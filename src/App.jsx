@@ -8,6 +8,7 @@ import { useUrlQueryState } from './hooks/useUrlQueryState'
 import './App.css'
 
 export default function App () {
+  const [showHelp, setShowHelp] = useState(true);
   const [query, setQuery] = useUrlQueryState('q')
 
   const handlePickTerm = useCallback((t) => {
@@ -59,7 +60,76 @@ export default function App () {
   return (
     <div className="app">
       {/* Inline style injection to enforce no-hover look */}
+
+      {showHelp && (
+        <div className="help-modal__overlay">
+          <div className="help-modal__content">
+            <h2>歡迎使用 LoTUS-BF！</h2>
+            <p>這是一個大腦功能搜尋引擎，您可以透過兩種方式搜尋：</p>
+            <ul>
+              <li><strong>關鍵字 (Terms):</strong> 例如 <code>"reward"</code>，可從左側列表點選或手動輸入。</li>
+              <li><strong>座標 (Locations):</strong> 例如 <code>[-2, 50, -6]</code>，可手動輸入 MNI 座標。</li>
+            </ul>
+            <p>搜尋結果將顯示相關的「研究」與「3D大腦影像」。</p>
+            <button onClick={() => setShowHelp(false)}>我了解了，開始使用！</button>
+          </div>
+        </div>
+      )}
+
       <style>{`
+
+        .help-modal__overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+          backdrop-filter: blur(4px); /* (可選) 毛玻璃效果 */
+        }
+        .help-modal__content {
+          background: #fff;
+          padding: 24px 32px;
+          border-radius: 12px;
+          width: 90%;
+          max-width: 500px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+          animation: modal-fade-in 0.3s ease-out; /* (可選) 淡入動畫 */
+        }
+        .help-modal__content h2 { margin-top: 0; }
+        .help-modal__content ul { padding-left: 20px; }
+        .help-modal__content code {
+          font-family: monospace;
+          background: #eee;
+          padding: 2px 4px;
+          border-radius: 4px;
+        }
+        .help-modal__content button {
+          /* 借用 .card button 的樣式，但讓它更明顯 */
+          font-size: 14px !important;
+          padding: 10px 16px !important;
+          border-radius: 8px !important;
+          background: var(--primary-600) !important;
+          color: #fff !important;
+          border: none !important;
+          cursor: pointer;
+          margin-top: 16px;
+          width: 100%;
+          transition: background 0.2s;
+        }
+        .help-modal__content button:hover {
+          background: var(--primary-700) !important;
+        }
+      
+        @keyframes modal-fade-in {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
         :root {
           --primary-600: #2563eb;
           --primary-700: #1d4ed8;
@@ -67,10 +137,13 @@ export default function App () {
           --border: #e5e7eb;
         }
         .app {
-          padding-right: 0 !important;
+          padding: 5;
           background-color: #DDDDFF; /* 改變背景顏色 */
+          min-height: 100vh;
           /* 新增：使用現代、易讀的系統字體 */
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang TC", "Microsoft JhengHei", sans-serif;
+          display: flex;
+          flex-direction: column;
         }
         .app__grid > .card { /* 鎖定那三個主要的卡片 */
           border: 1px solid var(--border);
@@ -78,7 +151,21 @@ export default function App () {
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 新增：陰影 */
           background: #ffffff; /* 新增：確保卡片是白色 */
         }
-        .app__grid { width: 100vw; max-width: 100vw; }
+        .app__grid { 
+          width: 100%;
+          flex-grow: 1; 
+          display: flex; 
+             
+        }
+        .app__grid > .card {
+          border-radius: 0;
+          box-shadow: none;
+          border: none;
+          border-right: 1px solid var(--border); /* 只保留卡片間的分隔線 */
+        }
+        .app__grid > .card:last-child {
+          border-right: none; /* 最後一張卡片不用右邊框 */
+        }
         .card input[type="text"],
         .card input[type="search"],
         .card input[type="number"],
@@ -162,7 +249,15 @@ export default function App () {
         }
         
         # 新增
-        .app__header { padding-bottom: 12px; }
+        .app__header { 
+          width: 100%;
+          padding: 24px 28px;
+          background: #ffffff; /* 標題區也是白色卡片 */
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+          flex-shrink: 0;
+          z-index: 10;
+        }
+
         .app__description {
           font-size: 14px;
           color: #555;
