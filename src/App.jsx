@@ -64,14 +64,14 @@ export default function App () {
       {showHelp && (
         <div className="help-modal__overlay">
           <div className="help-modal__content">
-            <h2>歡迎使用 NeuroBridge！</h2>
-            <p>這是一個大腦功能搜尋引擎，您可以透過兩種方式搜尋：</p>
+            <h2>Welcome to NeuroBridge!</h2>
+            <p>This is a brain function search engine. You can search in two ways:</p>
             <ul>
-              <li><strong>關鍵字 (Terms):</strong> 例如 <code>"reward"</code>，可從左側列表點選或手動輸入。</li>
-              <li><strong>座標 (Locations):</strong> 例如 <code>[-2, 50, -6]</code>，可手動輸入座標。</li>
+              <li><strong>Keywords (Terms):</strong> e.g., <code>"reward"</code>. You can click from the list on the left or type manually.</li>
+              <li><strong>Coordinates (Locations):</strong> e.g., <code>[-2, 50, -6]</code>. You can enter the coordinates manually.</li>
             </ul>
-            <p>搜尋結果將顯示相關的「研究」與「3D大腦影像」。</p>
-            <button onClick={() => setShowHelp(false)}>我了解了，開始使用！</button>
+            <p>Search results will display related "Studies" and "3D Brain Scans".</p>
+            <button onClick={() => setShowHelp(false)}>Got it, let's start!</button>
           </div>
         </div>
       )}
