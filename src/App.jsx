@@ -17,7 +17,7 @@ export default function App () {
 
   // --- resizable panes state ---
   const gridRef = useRef(null)
-  const [sizes, setSizes] = useState([28, 44, 28]) // [left, middle, right]
+  const [sizes, setSizes] = useState([25, 50, 25]) // [left, middle, right]
   const MIN_PX = 240
 
   const startDrag = (which, e) => {
@@ -64,11 +64,11 @@ export default function App () {
       {showHelp && (
         <div className="help-modal__overlay">
           <div className="help-modal__content">
-            <h2>歡迎使用 LoTUS-BF！</h2>
+            <h2>歡迎使用 NeuroBridge！</h2>
             <p>這是一個大腦功能搜尋引擎，您可以透過兩種方式搜尋：</p>
             <ul>
               <li><strong>關鍵字 (Terms):</strong> 例如 <code>"reward"</code>，可從左側列表點選或手動輸入。</li>
-              <li><strong>座標 (Locations):</strong> 例如 <code>[-2, 50, -6]</code>，可手動輸入 MNI 座標。</li>
+              <li><strong>座標 (Locations):</strong> 例如 <code>[-2, 50, -6]</code>，可手動輸入座標。</li>
             </ul>
             <p>搜尋結果將顯示相關的「研究」與「3D大腦影像」。</p>
             <button onClick={() => setShowHelp(false)}>我了解了，開始使用！</button>
@@ -137,13 +137,12 @@ export default function App () {
           --border: #e5e7eb;
         }
         .app {
-          padding: 5;
+          padding: 32px 16px;;
           background-color: #DDDDFF; /* 改變背景顏色 */
           min-height: 100vh;
           /* 新增：使用現代、易讀的系統字體 */
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang TC", "Microsoft JhengHei", sans-serif;
-          display: flex;
-          flex-direction: column;
+          
         }
         .app__grid > .card { /* 鎖定那三個主要的卡片 */
           border: 1px solid var(--border);
@@ -153,8 +152,14 @@ export default function App () {
         }
         .app__grid { 
           width: 100%;
-          flex-grow: 1; 
+          max-width: 90vw;
+          margin: 0 auto;
           display: flex; 
+          border: 1px solid var(--border);
+          border-radius: 16px; 
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07); 
+          overflow: hidden; /* 讓內部的卡片切齊圓角 */
+          background: #fff;
              
         }
         .app__grid > .card {
@@ -251,10 +256,12 @@ export default function App () {
         # 新增
         .app__header { 
           width: 100%;
+          max-width: 90vw;
+          margin: 0 auto 24px auto; 
           padding: 24px 28px;
           background: #ffffff; /* 標題區也是白色卡片 */
           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
-          flex-shrink: 0;
+          
           z-index: 10;
         }
 
@@ -303,7 +310,7 @@ export default function App () {
       `}</style>
 
       <header className="app__header">
-        <h1 className="app__title">LoTUS-BF</h1>
+        <h1 className="app__title">NeuroBridge</h1>
         <div className="app__subtitle">Location-or-Term Unified Search for Brain Functions</div>
         <p className="app__description">
           Search the brain function database using keywords (e.g., "reward") or MNI coordinates (e.g., <code>[-2, 50, -6]</code>).
